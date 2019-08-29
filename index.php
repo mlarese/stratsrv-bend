@@ -5,6 +5,4 @@
  * Date: 29/08/2019
  * Time: 18:52
  */
-?>
-
-index
+echo 'test';
