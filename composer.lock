@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "830a167f522f03be08f1c414fbc668af",
+    "content-hash": "682d5614caf129579ddbe72a58d97f73",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1239,6 +1239,59 @@
                 "psr-3"
             ],
             "time": "2018-11-05T09:00:11+00:00"
+        },
+        {
+            "name": "morris/microdb",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morris/microdb.git",
+                "reference": "61d6a6b01752fcf292931a6764cc42a5a607f7ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/morris/microdb/archive/master.zip",
+                "reference": "61d6a6b01752fcf292931a6764cc42a5a607f7ee"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpcov": "2.*",
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Morris Brodersen",
+                    "homepage": "http://morrisbrodersen.de",
+                    "role": "Owner"
+                },
+                {
+                    "name": "Rick de Graaff",
+                    "homepage": "http://rickdegraaff.nl",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "MicroDB is a minimalistic file-based JSON object database written in PHP.",
+            "homepage": "http://morris.github.io/microdb",
+            "keywords": [
+                "database",
+                "file",
+                "json"
+            ],
+            "abandoned": true,
+            "time": "2016-08-27T12:12:27+00:00"
         },
         {
             "name": "neomerx/cors-psr7",
