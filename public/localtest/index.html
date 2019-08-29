@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>privacy-widget</title><style>.privacy-scroller {
+        // font-size:9px !important;
+      }
+
+      .privacy-paragraphs .scroll-warning {
+        // font-size:9px !important;
+      }
+
+      .privacy-flag {
+        // font-size:9px !important;
+      }</style><link href=./static/mmprvwidget.css rel=stylesheet></head><body><script>function validateFormMmPrivacy  () {
+      var nameFld = document.getElementsByClassName('mm-prv-name')[0]
+
+      return nameFld.value
+    }
+
+    function disableButton (form) {
+      var btn =document.getElementById('mm-prv-form-submit')
+      btn.disabled = true
+      console.log('----- called by form onsubmit')
+      alert("onsubmit function")
+      return true
+    }
+
+    function submitForm(form) {
+        alert("form submit")
+        console.log('--------- called by submit click')
+        return form.submit()
+    }</script><script>/**
+       * mm-prv-form
+       * mm-prv-form-submit
+       * mm-prv-name
+       * mm-prv-surname
+       * mm-prv-email
+       * mm-prv-crp
+       */
+      window.prwidget={
+        language: 'it',
+        baseURL: 'http://192.168.1.86/privacybe/public',
+        bkBaseUrl: 'http://192.168.1.86/privacybe/public',
+        domain: 'localhost:8080',
+        page:'/page.html',
+        ref: 'RES_1',
+        termId:'mmone-normativa-default',
+        submitCaption: 'PRENOTA',
+        submitClass:'confirm confirm_it ST3__submit',
+        ownerId: 2,
+        __paragraphs: [{"text":"Html testo 1","treatments":[{"code":"Dati sensibili","restrictive":true,"mandatory":true,"text":"Ho letto e compreso.....","selected":false}],"scrolled":false,"title":"Informativa sul trattamento dei dati"},{"text":"testo html","treatments":[{"code":"Marketing","restrictive":true,"mandatory":true,"text":"Acconsento  ...","selected":false},{"code":"Newsletter","restrictive":false,"mandatory":false,"text":"Acconsento 2 .....","selected":false}],"scrolled":false,"title":"Ricezione di informazioni su prodotti e servizi"}]
+      };</script><div style=width:100%><form class=mm-prv-form method=post action=/ onsubmit="return disableButton(this.form)"><h5>Form di esempio</h5><table><tr><td>Nome</td><td><input type=text class=mm-prv-name name=name></td></tr><tr><td>Cognome</td><td><input type=text class=mm-prv-surname name=surname></td></tr><tr><td>Cellulare</td><td><input type=text class=mm-prv-crp name=cellulare></td></tr><tr><td>Matricola</td><td><input type=text class=mm-prv-crp name=matricola></td></tr><tr><td>Pin</td><td><input type=text class=mm-prv-crp name=pin></td></tr><tr><td>Email</td><td><input type=text class=mm-prv-email name=email></td></tr><tr><td>Targa</td><td><input type=text class="" name=targa></td></tr><tr><td></td><td><input id=mm-prv-form-submit onclick=submitForm(this.form) type=submit value=Invia class=mm-prv-form-submit style="padding: 6px 25px; background: orange"></td></tr></table></form><div id=mm-prv-wdg>contenuto se il widget non si attiva</div></div><script type=text/javascript src=./static/mmprvwidget.js></script></body></html>
