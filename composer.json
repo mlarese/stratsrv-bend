@@ -36,6 +36,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "symfony/console": "^4.1",
     "symfony/property-info": "4.1.x-dev",
-    "morris/microdb": "0.1.1"
+    "morris/microdb": "0.1.1",
+    "rakibtg/sleekdb": "1.5.0"
   }
 }
