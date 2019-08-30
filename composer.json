@@ -19,7 +19,7 @@
     "platform": {
       "php": "7.2.18"
     }
-  }
+  },
   "require": {
     "apache/log4php": "~2.3.0",
     "slim/slim": "^3.0",
