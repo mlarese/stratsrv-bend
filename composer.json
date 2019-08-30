@@ -6,7 +6,7 @@
   "keywords": ["stratsrv"],
   "extra": {
     "paas": {
-      "document-root": "public",
+      "document-root": "/public",
       "index-document": "index.php",
       "engines": {
         "nginx": "default"
