@@ -4,6 +4,24 @@
   "license": "BSD-3-Clause",
   "type": "project",
   "keywords": ["stratsrv"],
+  "extra": {
+    "paas": {
+      "document-root": "public",
+      "index-document": "index.php",
+      "engines": {
+        "nginx": "default"
+      },
+      "php-config": [],
+      "php-includes": [],
+      "php-fpm-config": [],
+      "php-fpm-includes": [],
+      "nginx-includes": [],
+      "log-files": [],
+      "compile": [],
+      "new-relic": false,
+      "access-log-format": ""
+    }
+  },
   "authors": [
     {
       "name": "Mauro larese",
