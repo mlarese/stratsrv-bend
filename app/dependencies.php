@@ -38,44 +38,10 @@ $container['em-config'] = function ($c) {
         false
     );
 
-    $subscriber = new \App\DoctrineEncrypt\Subscribers\DoctrineEncryptSubscriber(
-        new \Doctrine\Common\Annotations\AnnotationReader(),
-        new \App\DoctrineEncrypt\Encryptors\OpenSslEncryptor($settings['doctrine_config']['encryption_key'])
-    );
     $em = \Doctrine\ORM\EntityManager::create($settings['doctrine_config']['connection'], $config);
-    $eventManager = $em->getEventManager();
-    $eventManager->addEventSubscriber($subscriber);
 
     return $em;
 };
 
 
-$container['session'] = function ($container) {
-    return new \Adbar\Session(
-        $container->get('settings')['session']['namespace']
-    );
-};
-
-
-
-
-$container['encryptor'] = function ($container) {
-    $settings = $container->get('settings');
-    $options = $settings['doctrine_privacy'];
-
-    $enc = new OpenSslEncryptor($options['encryption_key']);
-    return $enc;
-};
-
-
-
-$container['slim_app'] = function  ($container) use($app){
-    return $app;
-};
-
-
-$container['action_handler'] = function ($container) {
-    $actionHandler = new \App\Action\ActionHandler($container);
-    return $actionHandler;
-};
 

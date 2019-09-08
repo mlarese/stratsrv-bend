@@ -13,7 +13,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // session_start();
 
-require __DIR__ . '/../app/src/DoctrineEncrypt/Configuration/Encrypted.php';
 
 // Instantiate the app
 
