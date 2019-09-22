@@ -24,16 +24,15 @@ class Test
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function get(Request $request, Response $response, $args) {
-
-
+        
         try {
-            $data=$request->getParsedBody();
+            //$data=$request->getParsedBody();
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
 
 
-        return $response->withJson(["result" => 'ok', 'data'=>$data]);
+        return $response->withJson(["result" => 'ok']);
     }
 
 
