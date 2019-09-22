@@ -24,7 +24,8 @@ class Prices
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function updatePrices(Request $request, Response $response, $args) {
-        return $response->withJson(["result" => 'ok']);
+        $body = $request->getParsedBody();
+        return $response->withJson(["result" => 'ok', 'desc'=>$body['description']]);
     }
 
 
