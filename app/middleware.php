@@ -74,10 +74,23 @@ if($authMode === 'jwt') {
         // "relaxed" => ["localhost"],
         "before" => function ($request, $arguments) {
             /** @var Request $request */
+            // print_r($arguments);
+            $isUpdate =  $request->isDelete() || $request->isPatch() || $request->isPost() || $request->isPut();
+
+            if($isUpdate) {
+                // print_r($arguments['decoded']['user']->acl);
+                // die(  'end');
+                // $user = $arguments['decoded']['user'] ;
+                // print_r(user);
+
+            }
+
             return $request;
         },
         "after" => function (Response $response, $arguments) {
-            return $response;
+            $canGoOn = true;
+            if($canGoOn) return $response;
+            else return $response->withStatus(401);
         },
         "error" => function ($response, $arguments) {
             $data["status"] = "error";
