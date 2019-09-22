@@ -71,6 +71,14 @@ if($authMode === 'jwt') {
         "secret" => $auth['secret'],
         "secure" => false,
         "attribute" => "token",
+        // "relaxed" => ["localhost"],
+        "before" => function ($request, $arguments) {
+            /** @var Request $request */
+            return $request;
+        },
+        "after" => function (Response $response, $arguments) {
+            return $response;
+        },
         "error" => function ($response, $arguments) {
             $data["status"] = "error";
             $data["message"] = $arguments["message"];

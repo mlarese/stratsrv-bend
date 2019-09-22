@@ -24,7 +24,8 @@ class Test
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function get(Request $request, Response $response, $args) {
-        
+        die('end');
+
         try {
             //$data=$request->getParsedBody();
         } catch (\Exception $e) {
