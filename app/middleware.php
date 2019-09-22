@@ -1,22 +1,13 @@
 <?php
-use RKA\SessionMiddleware;
-use Slim\App;
 use Slim\Collection;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Tuupola\Middleware\CorsMiddleware;
-use Monolog\Logger;
-use Monolog\Handler\RotatingFileHandler;
-use Tuupola\Middleware\JwtAuthentication;
 
 /**
  * @var Collection $settings
  */
 $settings = $app->getContainer()->get('settings');
-
-/** @var App $app */
-//$app->add( new \App\Manager\ApplicationMiddleware($settings['applications'],$app));
-// $app->add(new \Adbar\SessionMiddleware($settings['session']));
 
 $app->add(new CorsMiddleware(
     [
@@ -55,7 +46,7 @@ $app->add(new CorsMiddleware(
 ));
 
 // jwt, oauth
-$authMode = 'jwt';
+$authMode = 'no_jwt';
 
 $auth = $settings->get('auth');
 

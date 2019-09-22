@@ -7,7 +7,7 @@ use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class Test
+class Prices
 {
     /** @var Container */
     private $container;
@@ -23,16 +23,7 @@ class Test
      * @return Response
      * @throws \Interop\Container\Exception\ContainerException
      */
-    public function get(Request $request, Response $response, $args) {
-        die('end');
-
-        try {
-            //$data=$request->getParsedBody();
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-
-
+    public function updatePrices(Request $request, Response $response, $args) {
         return $response->withJson(["result" => 'ok']);
     }
 
