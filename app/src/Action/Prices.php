@@ -23,7 +23,7 @@ class Test
      * @return Response
      * @throws \Interop\Container\Exception\ContainerException
      */
-    public function welcome(Request $request, Response $response, $args) {
+    public function get(Request $request, Response $response, $args) {
 
 
         try {
