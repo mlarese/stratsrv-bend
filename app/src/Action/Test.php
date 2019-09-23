@@ -24,9 +24,7 @@ class Test
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function welcome(Request $request, Response $response, $args) {
-
         return $response->withJson(["result" => 'ok']);
     }
-
 
 }
