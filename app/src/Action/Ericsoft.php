@@ -16,9 +16,23 @@ class Ericsoft
     private $updatePricesDispoData;
     private $updatePricesDispoUaByKey;
 
+
+
     public function __construct( $container) {
         $this->container = $container;
     }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    public function operationResult(Request $request, Response $response, $args) {
+
+    }
+
 
     /**
      * @param Request $request
