@@ -5,7 +5,7 @@
 const API_CHANNELS_ERICSOFTRESP = '/api/channels/ericsoftresp';
 $app->get('/api/test/welcome', 'App\Action\Test:welcome');
 $app->post('/api/channels/ericsoft', 'App\Action\Ericsoft:updatePricesDispo');
-$app->get('/api/channels/ericsoft/occupaione', 'App\Action\Ericsoft:operationResult');
+$app->get('/api/channels/ericsoft/occupazione', 'App\Action\Ericsoft:operationResult');
 $app->get('/api/channels/ericsoft/prenotazioni', 'App\Action\Ericsoft:operationResult');
 $app->get('/api/channels/ericsoft/esitiprezzi', 'App\Action\Ericsoft:operationResult');
 $app->get('/api/channels/ericsoft/esitidispo', 'App\Action\Ericsoft:operationResult');
