@@ -10,7 +10,15 @@ $app->get('/api/channels/ericsoft/prenotazioni', 'App\Action\Ericsoft:operationR
 $app->get('/api/channels/ericsoft/esitiprezzi', 'App\Action\Ericsoft:operationResult');
 $app->get('/api/channels/ericsoft/esitidispo', 'App\Action\Ericsoft:operationResult');
 
+$app->post('/api/channels/ericsoft/occupazione', 'App\Action\Ericsoft:operationResult');
+$app->post('/api/channels/ericsoft/prenotazioni', 'App\Action\Ericsoft:operationResult');
+$app->post('/api/channels/ericsoft/esitiprezzi', 'App\Action\Ericsoft:operationResult');
+$app->post('/api/channels/ericsoft/esitidispo', 'App\Action\Ericsoft:operationResult');
 
+$app->put('/api/channels/ericsoft/occupazione', 'App\Action\Ericsoft:operationResult');
+$app->put('/api/channels/ericsoft/prenotazioni', 'App\Action\Ericsoft:operationResult');
+$app->put('/api/channels/ericsoft/esitiprezzi', 'App\Action\Ericsoft:operationResult');
+$app->put('/api/channels/ericsoft/esitidispo', 'App\Action\Ericsoft:operationResult');
 /*
  https://stratservicemanager.scalingo.io/api/channels/ericsoft/occupazione'
  https://stratservicemanager.scalingo.io/api/channels/ericsoft/prenotazzioni'
