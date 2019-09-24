@@ -1,0 +1,155 @@
+<?php
+
+namespace App\Action;
+
+use function explode;
+use MicroDB\Database;
+use Slim\Container;
+use Slim\Http\Request;
+use Slim\Http\Response;
+
+class Ericsoft
+{
+    /** @var Container */
+    private $container;
+    private $updatePricesDispoConfig;
+    private $updatePricesDispoData;
+    private $updatePricesDispoUaByKey;
+
+    public function __construct( $container) {
+        $this->container = $container;
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    public function updatePricesDispo(Request $request, Response $response, $args) {
+        $body = $request->getParsedBody();
+        $ua = $body['ua'];
+        $uaByKey =  array_combine($ua,$ua);
+        $data = $body['data'];
+        $headerRow = array_filter($body['data'][0]);
+        $autentication = $body['config'];
+
+        $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
+        $inventory = ["autentication"=>$autentication, "dates"=>[]];
+        $prices = ["autentication"=>$autentication, "dates"=>[]];
+
+        foreach($data as $row) {
+            if($row[0] === 'Import') continue;
+
+            $adate = explode('T',$row[1]);
+            $rowDate = $adate[0] ;
+
+            $rowPrice = ["date"=>$rowDate,"rooms"=>[]];
+            $rowInventory = ["date"=>$rowDate, "roomTypes"=>[]];
+
+            foreach($row as $i => $col) {
+                if(isset($headerRow[$i])) {
+                    $headerCode = $headerRow[$i];
+
+                    if(isset($headerConfig[$headerCode])) {
+                        $colConfig = $headerConfig[$headerCode];
+
+                        // [type] => p    [code] => FAM   [treatment] => BB
+                        if($colConfig["type"]=='p') {
+
+                            $curRoom = [];
+                            $curRoom['roomTypeCode']= $colConfig["code"];
+                            $curRoom['rateCode']= $colConfig["treatment"];
+                            $curRoom['price']= $col;
+                            $curRoom['minStay']= 0;
+                            $curRoom['maxStay']= 0;
+                            $curRoom['cta']= false;
+                            $curRoom['ctd']= false;
+
+                            $rowPrice['rooms'][]=$curRoom;
+
+                        } else if($colConfig["type"]=='a') {
+                            $curRoomType = [];
+                            $curRoomType['roomType'] = $colConfig["code"];
+                            $curRoomType['roomTypeGroupCode'] = $colConfig["code"];
+                            $curRoomType['physical'] = 10;
+                            $curRoomType['availability'] = $col;
+                            $curRoomType['currency'] = "EUR";
+                            $curRoomType['total'] = 0;
+                            $curRoomType['portalMaxAvailability'] = 0;
+                            $curRoomType['occupancyPercentage'] = 0;
+                            $curRoomType['sold'] = 4;
+                            $curRoomType['outOfInventory'] = 0;
+                            $curRoomType['outOfOrder'] = 0;
+
+                            $rowInventory['roomTypes'][]=$curRoomType;
+                        }
+
+                    }
+
+                }
+                // print_r($rowPrice);
+
+            }
+            $inventory['dates'][] = $rowInventory;
+            $prices['dates'][] = $rowPrice;
+            // print_r($rowPrice);
+        }
+
+        print_r($inventory);
+        print_r($prices);
+
+
+        // $this->postData(ERICSOFT_PRICES_URL, $prices);
+        // $this->postData(ERICSOFT_INVENTORY_URL,$inventory);
+
+        return $response->withJson(["result" => 'ok']);
+    }
+
+    const ERICSOFT_PRICES_URL = "https://webservices.ericsoft.com/API/Revenue/Provider/Prices";
+    const ERICSOFT_INVENTORY_URL = "https://webservices.ericsoft.com/API/Revenue/Provider/Availabilities";
+
+    private function postData($url, $data) {
+        $ch = curl_init($url);
+
+        $payload = json_encode($data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+    }
+    public function updatePricesDispoCreateValidHeaders($ua) {
+        $validHeaders = [];
+
+        foreach ($ua as $key=>$value) {
+            $validHeaders[$value] = ["type"=>"a","code"=>$value];
+
+            $validHeaders["${value}-ms"] = ["type"=>"ms","code"=>$value];
+
+            $validHeaders["${value}-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+            $validHeaders["${value}HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
+            $validHeaders["${value}FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+
+            $validHeaders["${value}1-prez"] = ["type"=>"p","code"=>$value];
+            $validHeaders["${value}1HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
+            $validHeaders["${value}1FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+
+            $validHeaders["${value}2-prez"] = ["type"=>"p","code"=>$value];
+            $validHeaders["${value}2HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
+            $validHeaders["${value}2FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+
+            $validHeaders["${value}3-prez"] = ["type"=>"p","code"=>$value];
+            $validHeaders["${value}3HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
+            $validHeaders["${value}3FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+        }
+
+        return $validHeaders;
+    }
+
+
+
+
+}
