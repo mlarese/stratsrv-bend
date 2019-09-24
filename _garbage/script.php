@@ -31,13 +31,12 @@
     return url;
   }
 
-
   // invii channel
 
   function postPrices () {
     var shprz = getSheetPrezziChannel ();
     var ua = getUa();
-    var data = shprz.getRange('A1:ID4').getValues();
+    var data = shprz.getRange('A1:ID6').getValues();
     var config = getConfigData();
     var payload = {data: data,config:config, description: 'channel data', ua:ua};
     var options = {
@@ -48,71 +47,6 @@
     var resp = UrlFetchApp.fetch('https://stratservicemanager.scalingo.io/api/channels/prices', options);
     var st=JSON.stringify( payload );
     Logger.log({st:st});
-  }
-
-  function columnToLetter(column){
-    var temp, letter = '';
-    while (column > 0){
-      temp = (column - 1) % 26;
-      letter = String.fromCharCode(temp + 65) + letter;
-      column = (column - temp - 1) / 26;
-    }
-    return letter;
-  }
-  function getPrezziChannelHeader() {
-    var shprz = getSheetPrezziChannel ();
-    shprz.getRange('D1:ID1');
-
-    var data = shprz.getRange('D1:ID1').getValues();
-    var dataExport = [];
-
-    data = data[0];
-    for(var col = 0;col<data.length;col++) {
-      curValue = data[col];
-      var shiftedCol = col+1+3;
-      if(curValue+''!='') {
-        var type='dispo';
-        var treatment='BB';
-        var code='';
-        var colName = columnToLetter(shiftedCol); //shift di 3 colonne
-
-        var aCode = curValue.split('-');
-        code=aCode[0];
-
-        if(aCode.length>1){
-          type = aCode[1];
-          aType=code.split('FA');   if(aType.length==2) treatment='FA';
-          aType=code.split('HB');   if(aType.length==2) treatment='HB';
-          code=aType[0];
-        }
-
-        var newValue = {
-          colIndex:(shiftedCol|0),
-          completeName:curValue,
-          type:type,
-          colName:colName,
-          code:code,
-          treatment:treatment,
-          data:[]
-        };
-        dataExport.push(newValue);
-
-      }
-    }
-    // Logger.log(dataExport);
-    return dataExport;
-
-  }
-
-  function addChannelData() {
-    var heads = getPrezziChannelHeader();
-    var shprz = getSheetPrezziChannel ();
-
-    for(var i = 0;i<heads.length;i++) {
-      var c = heads[i];
-      var data=shprz.getRange(c.colName+'2:'+c.colName+'367').getValues();
-      //Logger.log(data);
-    }
   }
 
   function getConfigData() {

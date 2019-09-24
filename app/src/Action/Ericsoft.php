@@ -29,8 +29,8 @@ class Ericsoft
      */
     public function updatePricesDispo(Request $request, Response $response, $args) {
         $body = $request->getParsedBody();
-        $ua = $body['ua'];
-        $uaByKey =  array_combine($ua,$ua);
+        $uaByKey = $body['ua'];
+
         $data = $body['data'];
         $headerRow = array_filter($body['data'][0]);
         $autentication = $body['config'];
@@ -38,6 +38,7 @@ class Ericsoft
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
         $prices = ["autentication"=>$autentication, "dates"=>[]];
+
 
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
@@ -54,12 +55,13 @@ class Ericsoft
 
                     if(isset($headerConfig[$headerCode])) {
                         $colConfig = $headerConfig[$headerCode];
+                        $colCode = $colConfig["code"];
 
                         // [type] => p    [code] => FAM   [treatment] => BB
                         if($colConfig["type"]=='p') {
 
                             $curRoom = [];
-                            $curRoom['roomTypeCode']= $colConfig["code"];
+                            $curRoom['roomTypeCode']= $colCode;
                             $curRoom['rateCode']= $colConfig["treatment"];
                             $curRoom['price']= $col;
                             $curRoom['minStay']= 0;
@@ -71,15 +73,15 @@ class Ericsoft
 
                         } else if($colConfig["type"]=='a') {
                             $curRoomType = [];
-                            $curRoomType['roomType'] = $colConfig["code"];
+                            $curRoomType['roomType'] = $colCode;
                             $curRoomType['roomTypeGroupCode'] = $colConfig["code"];
-                            $curRoomType['physical'] = 10;
+                            $curRoomType['physical'] = $uaByKey[$colCode]["physical"];
                             $curRoomType['availability'] = $col;
                             $curRoomType['currency'] = "EUR";
                             $curRoomType['total'] = 0;
                             $curRoomType['portalMaxAvailability'] = 0;
                             $curRoomType['occupancyPercentage'] = 0;
-                            $curRoomType['sold'] = 4;
+                            $curRoomType['sold'] = 0;
                             $curRoomType['outOfInventory'] = 0;
                             $curRoomType['outOfOrder'] = 0;
 
@@ -125,25 +127,25 @@ class Ericsoft
         $validHeaders = [];
 
         foreach ($ua as $key=>$value) {
-            $validHeaders[$value] = ["type"=>"a","code"=>$value];
+            $validHeaders[$key] = ["type"=>"a","code"=>$key];
 
-            $validHeaders["${value}-ms"] = ["type"=>"ms","code"=>$value];
+            $validHeaders["${key}-ms"] = ["type"=>"ms","code"=>$key];
 
-            $validHeaders["${value}-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
-            $validHeaders["${value}HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
-            $validHeaders["${value}FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+            $validHeaders["${key}-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
+            $validHeaders["${key}HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+            $validHeaders["${key}FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${value}1-prez"] = ["type"=>"p","code"=>$value];
-            $validHeaders["${value}1HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
-            $validHeaders["${value}1FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+            $validHeaders["${key}1-prez"] = ["type"=>"p","code"=>$key];
+            $validHeaders["${key}1HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+            $validHeaders["${key}1FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${value}2-prez"] = ["type"=>"p","code"=>$value];
-            $validHeaders["${value}2HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
-            $validHeaders["${value}2FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+            $validHeaders["${key}2-prez"] = ["type"=>"p","code"=>$key];
+            $validHeaders["${key}2HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+            $validHeaders["${key}2FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${value}3-prez"] = ["type"=>"p","code"=>$value];
-            $validHeaders["${value}3HB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"HB"];
-            $validHeaders["${value}3FB-prez"] = ["type"=>"p","code"=>$value,"treatment"=>"BB"];
+            $validHeaders["${key}3-prez"] = ["type"=>"p","code"=>$key];
+            $validHeaders["${key}3HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+            $validHeaders["${key}3FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
         }
 
         return $validHeaders;
