@@ -30,7 +30,8 @@ class Ericsoft
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function operationResult(Request $request, Response $response, $args) {
-
+        $body = $request->getParsedBody();
+        return $response->withJson(json_encode($body));
     }
 
 
@@ -113,12 +114,12 @@ class Ericsoft
             // print_r($rowPrice);
         }
 
-        print_r($inventory);
-        print_r($prices);
+        //print_r($inventory);
+        //print_r($prices);
 
 
-        // $this->postData(ERICSOFT_PRICES_URL, $prices);
-        // $this->postData(ERICSOFT_INVENTORY_URL,$inventory);
+        $this->postData(ERICSOFT_PRICES_URL,  json_encode($prices));
+        $this->postData(ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
         return $response->withJson(["result" => 'ok']);
     }
@@ -126,16 +127,21 @@ class Ericsoft
     const ERICSOFT_PRICES_URL = "https://webservices.ericsoft.com/API/Revenue/Provider/Prices";
     const ERICSOFT_INVENTORY_URL = "https://webservices.ericsoft.com/API/Revenue/Provider/Availabilities";
 
-    private function postData($url, $data) {
-        $ch = curl_init($url);
+    private function postData($url, $json) {
 
-        $payload = json_encode($data);
+        $ch = curl_init($url);
+        $payload = ['payload'=>$json];
+
+        curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
-
+        $info = curl_getinfo($ch);
         curl_close($ch);
+
+        return ['result'=>$result,'info'=>$info];
+
+
     }
     public function updatePricesDispoCreateValidHeaders($ua) {
         $validHeaders = [];
