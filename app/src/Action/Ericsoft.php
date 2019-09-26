@@ -31,7 +31,10 @@ class Ericsoft
      */
     public function operationResult(Request $request, Response $response, $args) {
         $body = $request->getParsedBody();
-        return $response->withJson(json_encode($body));
+        $response = [
+            "status"=>[ "code"=>"200", "description"=>"success"]
+        ];
+        return $response->withJson(json_encode($response));
     }
 
 

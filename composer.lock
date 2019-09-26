@@ -878,12 +878,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client.git",
-                "reference": "d6c7563bdf88d6a0719ea63e21c74dc86032364e"
+                "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/d6c7563bdf88d6a0719ea63e21c74dc86032364e",
-                "reference": "d6c7563bdf88d6a0719ea63e21c74dc86032364e",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/cd3c37998020d91ae4eafca4f26a92da4dabba83",
+                "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83",
                 "shasum": ""
             },
             "require": {
@@ -892,7 +892,7 @@
                 "google/auth": "^1.0",
                 "guzzlehttp/guzzle": "~5.3.1||~6.0",
                 "guzzlehttp/psr7": "^1.2",
-                "monolog/monolog": "^1.17",
+                "monolog/monolog": "^1.17|^2.0",
                 "php": ">=5.4",
                 "phpseclib/phpseclib": "~0.3.10||~2.0"
             },
@@ -931,20 +931,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-08-19T18:09:46+00:00"
+            "time": "2019-09-11T17:38:10+00:00"
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.112",
+            "version": "v0.115",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "0cc6d74aa99f5af8385c7b87599b97460e036dc2"
+                "reference": "b907bd827f3bfc4a80eebabdf61bee12baaac971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/0cc6d74aa99f5af8385c7b87599b97460e036dc2",
-                "reference": "0cc6d74aa99f5af8385c7b87599b97460e036dc2",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b907bd827f3bfc4a80eebabdf61bee12baaac971",
+                "reference": "b907bd827f3bfc4a80eebabdf61bee12baaac971",
                 "shasum": ""
             },
             "require": {
@@ -968,7 +968,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-08-31T00:23:10+00:00"
+            "time": "2019-09-21T00:23:39+00:00"
         },
         {
             "name": "google/auth",
