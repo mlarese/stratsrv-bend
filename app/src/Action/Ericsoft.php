@@ -32,9 +32,18 @@ class Ericsoft
     public function operationResult(Request $request, Response $response, $args) {
 
         $body = $request->getParsedBody();
+        $ope = "";
 
         $logger = \Logger::getLogger("main");
-        $logger->info("----- operationResult");
+
+        $logger->info("----- operationResult $ope  -------------");
+
+
+        if(isset($body['status'])) {
+            if(isset($body['status'][0]['description'])) {
+                $logger->info( $body['status'][0]['description'] );
+            }
+        }
 
         $resp = [
             "status"=>[ "code"=>"200", "description"=>"success"]
