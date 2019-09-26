@@ -49,6 +49,36 @@ class Ericsoft
         return $response->withJson($resp);
     }
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    public function operationResultWithHotelCode(Request $request, Response $response, $args) {
+
+        $ope = $args['type'];
+        $hcode = $args['hcode'];
+
+        $body = $request->getParsedBody();
+
+        $date =date('Y-m-d H:i:s');
+
+        $logger = \Logger::getLogger("main");
+        $strJs = json_encode($body);
+        $logger->info("[$date] ----- $ope hotel $hcode  -------------");
+
+        $logger->info($strJs);
+
+
+        $resp = [
+            "status"=>[ "timestamp"=>$date, "code"=>"200", "description"=>"success $ope $hcode"]
+        ];
+
+
+        return $response->withJson($resp);
+    }
 
     /**
      * @param Request $request

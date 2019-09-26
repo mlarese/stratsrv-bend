@@ -25,3 +25,7 @@ $app->put('/api/channels/ericsoft/esitidispo', 'App\Action\Ericsoft:operationRes
  https://stratservicemanager.scalingo.io/api/channels/ericsoft/esitiprezzi'
  https://stratservicemanager.scalingo.io/api/channels/ericsoft/esitidispo'
 **/
+
+
+$app->post('/api/channels/ericsoft/{type}/{hcode}', 'App\Action\Ericsoft:operationResultWithHotelCode');
+$app->put('/api/channels/ericsoft/{type}/{hcode}', 'App\Action\Ericsoft:operationResultWithHotelCode');
