@@ -39,5 +39,24 @@ require __DIR__ . '/../app/middleware.php';
 // Register routes
 require __DIR__ . '/../app/routes.php';
 
+
+$logConfig = array(
+    'appenders' => array(
+        'default' => array(
+            'class' => 'LoggerAppenderConsole',
+            'layout' => array(
+                'class' => 'LoggerLayoutSimple',
+            ),
+        ),
+    ),
+    'rootLogger' => array(
+        'appenders' => array('default'),
+    ),
+);
+
+
+Logger::configure($logConfig);
+
+
 // Run!
 $app->run();

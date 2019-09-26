@@ -34,7 +34,7 @@ class Ericsoft
         $body = $request->getParsedBody();
 
         $logger = \Logger::getLogger("main");
-        // $logger->info("----- operationResult");
+        $logger->info("----- operationResult");
 
         $resp = [
             "status"=>[ "code"=>"200", "description"=>"success"]
