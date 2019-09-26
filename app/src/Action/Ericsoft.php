@@ -31,9 +31,16 @@ class Ericsoft
      */
     public function operationResult(Request $request, Response $response, $args) {
         $body = $request->getParsedBody();
+
+        $logger = Logger::getLogger("main");
+        $logger->info("----- operationResult");
+
+
+
         $response = [
             "status"=>[ "code"=>"200", "description"=>"success"]
         ];
+
         return $response->withJson(json_encode($response));
     }
 
