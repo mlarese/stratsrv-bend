@@ -35,8 +35,11 @@ class Ericsoft
         $ope = "";
 
         $logger = \Logger::getLogger("main");
-
+        $strJs = json_encode($body);
         $logger->info("----- operationResult $ope  -------------");
+        $logger->info($strJs);
+
+
 
 
         if(isset($body['status'])) {
