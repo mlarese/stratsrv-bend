@@ -30,18 +30,18 @@ class Ericsoft
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function operationResult(Request $request, Response $response, $args) {
+
         $body = $request->getParsedBody();
 
-        $logger = Logger::getLogger("main");
-        $logger->info("----- operationResult");
+        $logger = \Logger::getLogger("main");
+        // $logger->info("----- operationResult");
 
-
-
-        $response = [
+        $resp = [
             "status"=>[ "code"=>"200", "description"=>"success"]
         ];
 
-        return $response->withJson(json_encode($response));
+
+        return $response->withJson($resp);
     }
 
 
