@@ -99,7 +99,7 @@ class Ericsoft
         $strJs = json_encode($body);
 
         //$logger->info("----- prezzi  -------------");
-        $logger->info($strJs);
+        //$logger->info($strJs);
 
 
 
@@ -108,11 +108,12 @@ class Ericsoft
         $autentication = $body['config'];
 
 
+        $logger->info(json_encode($uaByKey));
 
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
 
-        $logger->info(json_encode($headerRow));
-        $logger->info(json_encode($headerConfig));
+        //$logger->info(json_encode($headerRow));
+        //$logger->info(json_encode($headerConfig));
 
 
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
