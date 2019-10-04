@@ -92,6 +92,8 @@ class Ericsoft
         $uaByKey = $body['ua'];
 
         $body['data'] = json_decode( $body['data'], true);
+        $body['headers'] = json_decode( $body['headers'], true);
+
         $data=$body['data'];
         $logger = \Logger::getLogger("main");
         $strJs = json_encode($body);
@@ -102,7 +104,7 @@ class Ericsoft
 
 
 
-        $headerRow = array_filter($data[0]);
+        $headerRow = array_filter($body['headers']);
         $autentication = $body['config'];
 
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
