@@ -104,7 +104,7 @@ class Ericsoft
 
 
 
-        $headerRow = array_filter($body['headers']);
+        $headerRow = array_filter($body['headers'][0]);
         $autentication = $body['config'];
 
 
