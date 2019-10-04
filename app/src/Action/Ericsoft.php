@@ -99,6 +99,11 @@ class Ericsoft
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
         $prices = ["autentication"=>$autentication, "dates"=>[]];
 
+        $logger = \Logger::getLogger("main");
+        $strJs = json_encode($body);
+        $logger->info("----- prezzi  -------------");
+        $logger->info($strJs);
+        return $response->withJson(["result" => 'ok']);
 
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
@@ -162,7 +167,6 @@ class Ericsoft
         //print_r($inventory);
         //print_r($prices);
 
-        $logger = \Logger::getLogger("main");
         $strJs = json_encode($prices);
         $logger->info("----- prezzi  -------------");
 
