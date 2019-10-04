@@ -91,15 +91,18 @@ class Ericsoft
         $body = $request->getParsedBody();
         $uaByKey = $body['ua'];
 
-        $data = $body['data'];
+        $body['data'] = json_decode( $body['data'], true);
+        $data=$body['data'];
         $logger = \Logger::getLogger("main");
-        $strJs = json_encode($body);
-        $logger->info("----- prezzi  -------------");
-        $logger->info($strJs);
-        return $response->withJson(["result" => 'ok']);
+        //$strJs = json_encode($body);
+
+        //$logger->info("----- prezzi  -------------");
+        //$logger->info($strJs);
+        // return $response->withJson(["result" => 'ok']);
 
 
-        $headerRow = array_filter($body['data'][0]);
+
+        $headerRow = array_filter($data[0]);
         $autentication = $body['config'];
 
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
