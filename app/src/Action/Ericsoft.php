@@ -100,16 +100,24 @@ class Ericsoft
 
         //$logger->info("----- prezzi  -------------");
         $logger->info($strJs);
-        // return $response->withJson(["result" => 'ok']);
+
 
 
 
         $headerRow = array_filter($body['headers']);
         $autentication = $body['config'];
 
+
+
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
+
+        $logger->info(json_encode($headerRow));
+        $logger->info(json_encode($headerConfig));
+
+
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
         $prices = ["autentication"=>$autentication, "dates"=>[]];
+
 
 
 
