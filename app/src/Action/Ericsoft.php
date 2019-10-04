@@ -94,10 +94,10 @@ class Ericsoft
         $body['data'] = json_decode( $body['data'], true);
         $data=$body['data'];
         $logger = \Logger::getLogger("main");
-        //$strJs = json_encode($body);
+        $strJs = json_encode($body);
 
         //$logger->info("----- prezzi  -------------");
-        //$logger->info($strJs);
+        $logger->info($strJs);
         // return $response->withJson(["result" => 'ok']);
 
 
