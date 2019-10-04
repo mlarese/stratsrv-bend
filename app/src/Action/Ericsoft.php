@@ -162,9 +162,14 @@ class Ericsoft
         //print_r($inventory);
         //print_r($prices);
 
+        $logger = \Logger::getLogger("main");
+        $strJs = json_encode($prices);
+        $logger->info("----- prezzi  -------------");
+
+        $logger->info($strJs);
 
         $this->postData(ERICSOFT_PRICES_URL,  json_encode($prices));
-        $this->postData(ERICSOFT_INVENTORY_URL,json_encode($inventory));
+        // $this->postData(ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
         return $response->withJson(["result" => 'ok']);
     }
