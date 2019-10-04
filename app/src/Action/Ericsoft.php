@@ -92,6 +92,13 @@ class Ericsoft
         $uaByKey = $body['ua'];
 
         $data = $body['data'];
+        $logger = \Logger::getLogger("main");
+        $strJs = json_encode($body);
+        $logger->info("----- prezzi  -------------");
+        $logger->info($strJs);
+        return $response->withJson(["result" => 'ok']);
+
+
         $headerRow = array_filter($body['data'][0]);
         $autentication = $body['config'];
 
@@ -99,11 +106,8 @@ class Ericsoft
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
         $prices = ["autentication"=>$autentication, "dates"=>[]];
 
-        $logger = \Logger::getLogger("main");
-        $strJs = json_encode($body);
-        $logger->info("----- prezzi  -------------");
-        $logger->info($strJs);
-        return $response->withJson(["result" => 'ok']);
+
+
 
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
