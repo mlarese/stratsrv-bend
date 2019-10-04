@@ -168,8 +168,8 @@ class Ericsoft
 
         $logger->info($strJs);
 
-        $this->postData(ERICSOFT_PRICES_URL,  json_encode($prices));
-        // $this->postData(ERICSOFT_INVENTORY_URL,json_encode($inventory));
+        $this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
+        // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
         return $response->withJson(["result" => 'ok']);
     }
