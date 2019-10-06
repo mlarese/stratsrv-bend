@@ -195,7 +195,7 @@ class Ericsoft
 
         $logger->info($strJs);
 
-        //$this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
+        $this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
         // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
         $logger->info('------------------ prezzi inviati');
