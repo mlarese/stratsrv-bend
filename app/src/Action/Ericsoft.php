@@ -88,15 +88,18 @@ class Ericsoft
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function updatePricesDispo(Request $request, Response $response, $args) {
+        $logger = \Logger::getLogger("main");
         $body = $request->getParsedBody();
         $uaByKey = $body['ua'];
+        $uaByKey=json_decode($uaByKey,true);
+
 
         $body['data'] = json_decode( $body['data'], true);
         $body['headers'] = json_decode( $body['headers'], true);
 
         $data=$body['data'];
-        $logger = \Logger::getLogger("main");
-        $strJs = json_encode($body);
+
+        //$strJs = json_encode($body);
 
         //$logger->info("----- prezzi  -------------");
         //$logger->info($strJs);
@@ -108,7 +111,8 @@ class Ericsoft
         $autentication = $body['config'];
 
 
-        $logger->info(json_encode($uaByKey));
+        //$logger->info(json_encode($uaByKey));
+
 
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
 
@@ -146,7 +150,7 @@ class Ericsoft
                             $curRoom = [];
                             $curRoom['roomTypeCode']= $colCode;
                             $curRoom['rateCode']= $colConfig["treatment"];
-                            $curRoom['price']= $col;
+                            $curRoom['price']= round($col);
                             $curRoom['minStay']= 0;
                             $curRoom['maxStay']= 0;
                             $curRoom['cta']= false;
@@ -182,6 +186,7 @@ class Ericsoft
             // print_r($rowPrice);
         }
 
+
         //print_r($inventory);
         //print_r($prices);
 
@@ -190,8 +195,10 @@ class Ericsoft
 
         $logger->info($strJs);
 
-        $this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
+        //$this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
         // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
+
+        $logger->info('------------------ prezzi inviati');
 
         return $response->withJson(["result" => 'ok']);
     }
