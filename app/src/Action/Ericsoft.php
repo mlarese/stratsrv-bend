@@ -67,7 +67,7 @@ class Ericsoft
 
         $logger = \Logger::getLogger("main");
         $strJs = json_encode($body);
-        $logger->info("[$date] ----- $ope hotel $hcode  -------------");
+        $logger->info("--- operationResultWithHotelCode [$date] ----- $ope hotel $hcode  -------------");
 
         $logger->info($strJs);
 
