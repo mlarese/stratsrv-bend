@@ -190,12 +190,12 @@ class Ericsoft
         //print_r($inventory);
         //print_r($prices);
 
-        $strJs = json_encode($prices);
+        $strPrices = json_encode($prices);
         $logger->info("----- prezzi  -------------");
 
-        $logger->info($strJs);
+        $logger->info($strPrices);
 
-        $rpr = $this->postData(self::ERICSOFT_PRICES_URL,  json_encode($prices));
+        $rpr = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices);
         // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
         $logger->info('------------------ prezzi inviati');
