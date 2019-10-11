@@ -198,6 +198,7 @@ class Ericsoft
         $rpr = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices);
         // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
 
+        $logger->info(json_encode($rpr));
         $logger->info('------------------ prezzi inviati');
 
         return $response->withJson(["result" => 'ok']);
