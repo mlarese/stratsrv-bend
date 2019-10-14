@@ -96,6 +96,7 @@ class Ericsoft
 
         $body['data'] = json_decode( $body['data'], true);
         $body['headers'] = json_decode( $body['headers'], true);
+        $body['config'] = json_decode( $body['config'], true);
 
         $data=$body['data'];
 
