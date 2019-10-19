@@ -48,9 +48,19 @@ $logConfig = array(
                 'class' => 'LoggerLayoutSimple',
             ),
         ),
+        'file' => array(
+            'class' => 'LoggerAppenderFile',
+            'layout' => array(
+                'class' => 'LoggerLayoutSimple',
+            ),
+            'params' => array(
+                'file' => 'main.log',
+                'append' => true
+            )
+        ),
     ),
     'rootLogger' => array(
-        'appenders' => array('default'),
+        'appenders' => array('default','file'),
     ),
 );
 

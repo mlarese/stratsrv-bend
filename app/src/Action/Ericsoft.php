@@ -125,9 +125,6 @@ class Ericsoft
         $prices = ["autentication"=>$autentication, "dates"=>[]];
 
 
-
-
-
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
 
@@ -192,15 +189,17 @@ class Ericsoft
         //print_r($prices);
 
         $strPrices = json_encode($prices);
-        $logger->info("----- prezzi  -------------");
+        $strInv = json_encode($inventory);
+        $logger->info("\n\n------------------");
 
-        $logger->info($strPrices);
 
-        $rpr = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices);
-        // $this->postData(self::ERICSOFT_INVENTORY_URL,json_encode($inventory));
+        $logger->info($strInv);
 
-        $logger->info(json_encode($rpr));
-        $logger->info('------------------ prezzi inviati');
+        //$logger->info($strPrices);
+        //$rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
+        //$logger->info($strInv);
+        $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);  $logger->info(json_encode($rpd));
+        $logger->info('\n\n ------------------');
 
         return $response->withJson(["result" => 'ok']);
     }
@@ -220,9 +219,7 @@ class Ericsoft
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        return ['result'=>$result,'info'=>$info];
-
-
+        return ['result'=>$result,'info'=>$info,'payload'=>$json];
     }
     public function updatePricesDispoCreateValidHeaders($ua) {
         $validHeaders = [];
