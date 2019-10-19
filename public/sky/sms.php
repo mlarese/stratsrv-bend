@@ -5,9 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<a href="sms:1234&body=hi">ios Send an SMS</a>
+<a id="send" href="sms:1234&body=hi">ios Send an SMS</a>
 <br>
 
 <a href="sms:1234?body=hi">Android Send an SMS</a>
+<script>
+  //document.getElementById("send").click();
+</script>
+
 </body>
 </html>
