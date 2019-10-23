@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use function explode;
+use function json_encode;
 use MicroDB\Database;
 use Slim\Container;
 use Slim\Http\Request;
@@ -80,6 +81,8 @@ class Ericsoft
             "messageId"=>$msgId,
             "status"=>[[ "code"=>200, "description"=>"success"]]
         ];
+
+        $logger->info(json_encode(["type"=>"test body","Body"=>$strJs,"resp"=>$resp]));
 
         $jsResponse = $response->withJson($resp);
 
