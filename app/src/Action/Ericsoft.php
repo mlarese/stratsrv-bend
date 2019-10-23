@@ -61,7 +61,11 @@ class Ericsoft
         $ope = $args['type'];
         $hcode = $args['hcode'];
 
+        $msgId="";
         $body = $request->getParsedBody();
+
+        if(isset($body['messageId']))
+            $msgId=$body['messageId'];
 
         $date =date('Y-m-d H:i:s');
 
@@ -73,7 +77,8 @@ class Ericsoft
 
 
         $resp = [
-            "status"=>[ "timestamp"=>$date, "code"=>"200", "description"=>"success $ope $hcode"]
+            "messageId"=>$msgId,
+            "status"=>[[ "code"=>200, "description"=>"success"]]
         ];
 
 
@@ -190,16 +195,14 @@ class Ericsoft
 
         $strPrices = json_encode($prices);
         $strInv = json_encode($inventory);
-        $logger->info("\n\n------------------");
-
-
+        $logger->info("---------inv---------");
         $logger->info($strInv);
-
+        $logger->info("----------prz--------");
         $logger->info($strPrices);
-        $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
-        //$logger->info($strInv);
+        //$rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
+
         //$rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);  $logger->info(json_encode($rpd));
-        $logger->info('\n\n ------------------');
+        $logger->info('------------------');
 
         return $response->withJson(["result" => 'ok']);
     }
