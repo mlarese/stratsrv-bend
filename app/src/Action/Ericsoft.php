@@ -64,6 +64,8 @@ class Ericsoft
 
         $msgId="";
         $body = $request->getParsedBody();
+        $strJs = $body['payload'];
+        $body = json_decode($body['payload'],true);
 
         if(isset($body['messageId']))
             $msgId=$body['messageId'];
@@ -71,7 +73,7 @@ class Ericsoft
         $date =date('Y-m-d H:i:s');
 
         $logger = \Logger::getLogger("main");
-        $strJs = json_encode($body);
+
         $logger->info("--- operationResultWithHotelCode [$date] ----- message=$msgId ope=$ope hotel=$hcode  -------------");
 
         $logger->info(["type"=>"test body","Body"=>$strJs]);
