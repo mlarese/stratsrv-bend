@@ -60,7 +60,7 @@ $logConfig = array(
         ),
     ),
     'rootLogger' => array(
-        'appenders' => array('default','file'),
+        'appenders' => array('default'),
     ),
 );
 
