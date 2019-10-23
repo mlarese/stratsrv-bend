@@ -71,9 +71,9 @@ class Ericsoft
 
         $logger = \Logger::getLogger("main");
         $strJs = json_encode($body);
-        $logger->info("--- operationResultWithHotelCode [$date] ----- $ope hotel $hcode  -------------");
+        $logger->info("--- operationResultWithHotelCode [$date] ----- message=$msgId ope=$ope hotel=$hcode  -------------");
 
-        $logger->info($strJs);
+        $logger->info(["type"=>"test body","Body"=>$strJs]);
 
 
         $resp = [
@@ -81,8 +81,9 @@ class Ericsoft
             "status"=>[[ "code"=>200, "description"=>"success"]]
         ];
 
+        $jsResponse = $response->withJson($resp);
 
-        return $response->withJson($resp);
+        return $jsResponse;
     }
 
     /**
