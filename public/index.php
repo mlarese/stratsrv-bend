@@ -45,17 +45,18 @@ $logConfig = array(
         'default' => array(
             'class' => 'LoggerAppenderConsole',
             'layout' => array(
-                'class' => 'LoggerLayoutSimple',
+                'class' => 'LoggerLayoutPattern',
             ),
         ),
         'file' => array(
             'class' => 'LoggerAppenderFile',
             'layout' => array(
-                'class' => 'LoggerLayoutSimple',
+                'class' => 'LoggerLayoutPattern',
             ),
             'params' => array(
                 'file' => 'main.log',
-                'append' => true
+                'append' => true,
+                'conversionPattern' => '%date %logger %-5level %msg%n'
             )
         ),
     ),

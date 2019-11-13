@@ -175,7 +175,7 @@ class Ericsoft
                             $curRoomType['availability'] = $col;
                             $curRoomType['currency'] = "EUR";
                             $curRoomType['total'] = 0;
-                            $curRoomType['portalMaxAvailability'] = 0;
+                            $curRoomType['portalMaxAvailability'] = $curRoomType['availability'] ;
                             $curRoomType['occupancyPercentage'] = 0;
                             $curRoomType['sold'] = 0;
                             $curRoomType['outOfInventory'] = 0;
@@ -204,7 +204,10 @@ class Ericsoft
         $logger->info("---------inv---------");
         $logger->info($strInv);
         $logger->info("----------prz--------");
-        $logger->info($strPrices);
+       // $logger->info($strPrices);
+
+
+
         $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
 
         $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);  $logger->info(json_encode($rpd));
