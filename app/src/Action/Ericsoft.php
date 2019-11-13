@@ -143,7 +143,7 @@ class Ericsoft
             $rowDate = $adate[0] ;
 
             $rowPrice = ["date"=>$rowDate,"rooms"=>[]];
-            $rowInventory = ["date"=>$rowDate, "roomTypes"=>[]];
+            $rowInventory = ["date"=>$rowDate, "rooms"=>[]];
 
             foreach($row as $i => $col) {
                 if(isset($headerRow[$i])) {
@@ -168,20 +168,15 @@ class Ericsoft
                             $rowPrice['rooms'][]=$curRoom;
 
                         } else if($colConfig["type"]=='a') {
-                            $curRoomType = [];
-                            $curRoomType['roomType'] = $colCode;
-                            $curRoomType['roomTypeGroupCode'] = $colConfig["code"];
-                            $curRoomType['physical'] = $uaByKey[$colCode]["physical"];
-                            $curRoomType['availability'] = $col;
-                            $curRoomType['currency'] = "EUR";
-                            $curRoomType['total'] = 0;
-                            $curRoomType['portalMaxAvailability'] = $curRoomType['availability'] ;
-                            $curRoomType['occupancyPercentage'] = 0;
-                            $curRoomType['sold'] = 0;
-                            $curRoomType['outOfInventory'] = 0;
-                            $curRoomType['outOfOrder'] = 0;
 
-                            $rowInventory['roomTypes'][]=$curRoomType;
+
+
+
+                            $curRoomType = [];
+                            $curRoomType['roomTypeCode'] = $colCode;
+                            $curRoomType['quantity'] = $col;
+
+                            $rowInventory['rooms'][]=$curRoomType;
                         }
 
                     }
@@ -204,11 +199,10 @@ class Ericsoft
         $logger->info("---------inv---------");
         $logger->info($strInv);
         $logger->info("----------prz--------");
-       // $logger->info($strPrices);
+        $logger->info($strPrices);
+die;
 
-
-
-        $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
+        // $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
 
         $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);  $logger->info(json_encode($rpd));
         $logger->info('------------------');
