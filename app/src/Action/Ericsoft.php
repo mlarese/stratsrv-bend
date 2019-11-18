@@ -200,12 +200,12 @@ class Ericsoft
         $logger->info($strInv);
         $logger->info("----------prz--------");
         $logger->info($strPrices);
-die;
+        // return $response->withJson(["result" => 'ok']); die;
 
         // $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
 
-        $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);  $logger->info(json_encode($rpd));
-        $logger->info('------------------');
+        $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv); $logger->info(json_encode($rpd));
+        // $logger->info('------------------');
 
         return $response->withJson(["result" => 'ok']);
     }
@@ -225,7 +225,7 @@ die;
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        return ['result'=>$result,'info'=>$info,'payload'=>$json];
+        return ['result'=>$result,'info'=>$info];
     }
     public function updatePricesDispoCreateValidHeaders($ua) {
         $validHeaders = [];

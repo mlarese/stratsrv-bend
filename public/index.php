@@ -52,11 +52,13 @@ $logConfig = array(
             'class' => 'LoggerAppenderFile',
             'layout' => array(
                 'class' => 'LoggerLayoutPattern',
+                'params' => array(
+                    'conversionPattern' => '%date %logger %-5level %msg%n'
+                )
             ),
             'params' => array(
                 'file' => 'main.log',
-                'append' => true,
-                'conversionPattern' => '%date %logger %-5level %msg%n'
+                'append' => true
             )
         ),
     ),
