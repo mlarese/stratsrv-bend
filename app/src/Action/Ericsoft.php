@@ -158,7 +158,10 @@ class Ericsoft
 
                             $curRoom = [];
                             $curRoom['roomTypeCode']= $colCode;
-                            $curRoom['rateCode']= $colConfig["treatment"];
+
+                            $curRoom['rateCode']= 'BB';
+                            if(isset($colConfig["treatment"]))
+                                $curRoom['rateCode']= $colConfig["treatment"];
                             $curRoom['price']= round($col);
                             $curRoom['minStay']= 0;
                             $curRoom['maxStay']= 0;
