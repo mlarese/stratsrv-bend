@@ -128,13 +128,13 @@ class Ericsoft
 
         $headerConfig = $this->updatePricesDispoCreateValidHeaders($uaByKey);
 
-        //$logger->info(json_encode($headerRow));
+        //$logger->info(json_encode($uaByKey));
         //$logger->info(json_encode($headerConfig));
 
 
         $inventory = ["autentication"=>$autentication, "dates"=>[]];
         $prices = ["autentication"=>$autentication, "dates"=>[]];
-
+//
 
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
@@ -242,17 +242,21 @@ class Ericsoft
             $validHeaders["${key}HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
             $validHeaders["${key}FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${key}1-prez"] = ["type"=>"p","code"=>$key];
-            $validHeaders["${key}1HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
-            $validHeaders["${key}1FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
+           // $validHeaders["${key}1-prez"] = ["type"=>"p","code"=>$key];
+           // $validHeaders["${key}1HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+           // $validHeaders["${key}1FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${key}2-prez"] = ["type"=>"p","code"=>$key];
-            $validHeaders["${key}2HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
-            $validHeaders["${key}2FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
+           // $validHeaders["${key}2-prez"] = ["type"=>"p","code"=>$key];
+           // $validHeaders["${key}2HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+           // $validHeaders["${key}2FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
 
-            $validHeaders["${key}3-prez"] = ["type"=>"p","code"=>$key];
-            $validHeaders["${key}3HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
-            $validHeaders["${key}3FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
+           // $validHeaders["${key}3-prez"] = ["type"=>"p","code"=>$key];
+           // $validHeaders["${key}3HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+           // $validHeaders["${key}3FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
+
+           // $validHeaders["${key}4-prez"] = ["type"=>"p","code"=>$key];
+           // $validHeaders["${key}4HB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"HB"];
+           // $validHeaders["${key}4FB-prez"] = ["type"=>"p","code"=>$key,"treatment"=>"BB"];
         }
 
         return $validHeaders;
