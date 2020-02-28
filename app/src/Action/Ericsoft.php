@@ -139,8 +139,18 @@ class Ericsoft
         foreach($data as $row) {
             if($row[0] === 'Import') continue;
 
+
             $adate = explode('T',$row[1]);
-            $rowDate = $adate[0] ;
+            $rowDate =  $adate[0] ;
+
+            try {
+                $rowDate = date_create($rowDate);
+                date_add($rowDate, date_interval_create_from_date_string('1 days'));
+                $rowDate=$rowDate->format('Y-m-d');
+            } catch (\Exception $e) {
+                $logger->info('error ' .$e->getMessage());
+            }
+
 
             $rowPrice = ["date"=>$rowDate,"rooms"=>[]];
             $rowInventory = ["date"=>$rowDate, "rooms"=>[]];
@@ -163,6 +173,9 @@ class Ericsoft
                             if(isset($colConfig["treatment"]))
                                 $curRoom['rateCode']= $colConfig["treatment"];
                             $curRoom['price']= round($col);
+
+                            // $logger->info($row[1] . ' - ' . $rowDate . ' - '. $curRoom['price']);
+
                             $curRoom['minStay']= 0;
                             $curRoom['maxStay']= 0;
                             $curRoom['cta']= false;
