@@ -101,6 +101,13 @@ class Ericsoft
     public function updatePricesDispo(Request $request, Response $response, $args) {
         $logger = \Logger::getLogger("main");
         $body = $request->getParsedBody();
+
+        $doPrezzi = "1";
+        if ( isset($body['doPrezzi'])) $doPrezzi = $body['doPrezzi'];
+
+        $doDispo = "1";
+        if ( isset($body['doDispo'])) $doDispo = $body['doDispo'];
+
         $uaByKey = $body['ua'];
         $uaByKey=json_decode($uaByKey,true);
 
@@ -111,13 +118,13 @@ class Ericsoft
 
         $data=$body['data'];
 
-        //$strJs = json_encode($body);
+        //commenta
+        // $strJs = json_encode($body);
 
         //$logger->info("----- prezzi  -------------");
-        //$logger->info($strJs);
 
-
-
+        //commenta
+        // $logger->info($strJs);die('end');
 
         $headerRow = array_filter($body['headers'][0]);
         $autentication = $body['config'];
@@ -206,7 +213,6 @@ class Ericsoft
             // print_r($rowPrice);
         }
 
-
         //print_r($inventory);
         //print_r($prices);
 
@@ -218,9 +224,19 @@ class Ericsoft
         $logger->info($strPrices);
         // return $response->withJson(["result" => 'ok']); die;
 
-        $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices); $logger->info(json_encode($rpp));
+        if($doDispo === "1") {
+            $logger->info( '---- do dispo');
+            $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv);
+            //$logger->info(json_encode($rpd));
+        }
 
-        $rpd = $this->postData(self::ERICSOFT_INVENTORY_URL,$strInv); $logger->info(json_encode($rpd));
+        if($doPrezzi === "1") {
+            $logger->info( '---- do prezzi');
+            $rpp = $this->postData(self::ERICSOFT_PRICES_URL, $strPrices);
+            // $logger->info(json_encode($rpp));
+        }
+
+
         // $logger->info('------------------');
 
         return $response->withJson(["result" => 'ok']);
